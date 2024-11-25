@@ -52,8 +52,8 @@ This is a simple Math and Conversion module that allows users to perform various
 `$maths:+ 5 3` → Result: 8 `$maths:put - 5 3` → Result: -8
 
 # MathDB
-MathDB is an Powerful Libary for Storing Maths  
-Click the "Try MathDB" button, then type the command `#mathdb connect` to get started. After that, you can enter custom math expressions, such as `#savedb math=1+1 ans=2`.  
+MathDB is an Powerful Libary for Storing Maths and Also Download it as JSON 
+Click the "Try MathDB" button, then type the command `#mathdb connect` to get started. After that, you can enter custom math expressions, such as `#savedb math=1+1 ans=2`.  Type the `#downloaddb #maths` to Download it as JSON
 MathDB supports various operations, including square roots, sin, cos, log, tan, and more. Each calculation will be saved automatically. To view all saved math operations, simply type `#maths`.
 
 ## Usage:
