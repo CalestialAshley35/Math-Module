@@ -11,7 +11,7 @@ This is a simple Math and Conversion module that allows users to perform various
 - **Trigonometric and Logarithmic Functions**: Solve for Sin, Cos, Logarithms
 - **Advanced Math Operations**: Supports operations like `$maths:+`, `$maths:put -`
 
-## Commands:
+# Commands:
 
 ### Basic Math Operations:
 `x + y, x - y, x * y, x / y`
@@ -51,7 +51,8 @@ This is a simple Math and Conversion module that allows users to perform various
 
 `$maths:+ 5 3` → Result: 8 `$maths:put - 5 3` → Result: -8
 
-### MathDB
+# MathDB
+MathDB is an Powerful Libary for Storing Maths  
 Click the "Try MathDB" button, then type the command `#mathdb connect` to get started. After that, you can enter custom math expressions, such as `#savedb math=1+1 ans=2`.  
 MathDB supports various operations, including square roots, sin, cos, log, tan, and more. Each calculation will be saved automatically. To view all saved math operations, simply type `#maths`.
 
