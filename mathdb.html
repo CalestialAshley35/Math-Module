@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathDB Command Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1c1c1c, #383838);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffa3;
+    }
+
+    #commandInput {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #00ffa3;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      background: #111;
+      color: #fff;
+    }
+
+    .output {
+      background: #1c1c1c;
+      border: 1px solid #00ffa3;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    button {
+      background: #00ffa3;
+      color: #000;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00cc81;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>MathDB Command Library</h1>
+    <input type="text" id="commandInput" placeholder="Type your command here..." />
+    <button onclick="processCommand()">Run Command</button>
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    // Initialize the math database
+    const mathDB = JSON.parse(localStorage.getItem('mathDB')) || [];
+
+    function processCommand() {
+      const commandInput = document.getElementById('commandInput');
+      const output = document.getElementById('output');
+      const command = commandInput.value.trim();
+      
+      // Process commands
+      if (command.startsWith('#mathdb connect')) {
+        output.innerHTML = '<p>Connected to MathDB.</p>';
+      } else if (command.startsWith('#savedb')) {
+        // Parse the math and answer from the command
+        const mathMatch = command.match(/math=([^ ]+)/);
+        const ansMatch = command.match(/ans=([^ ]+)/);
+
+        if (mathMatch && ansMatch) {
+          const math = mathMatch[1];
+          const ans = ansMatch[1];
+          // Save to database
+          mathDB.push({ math, ans });
+          localStorage.setItem('mathDB', JSON.stringify(mathDB));
+          output.innerHTML = `<p>Saved: Math="${math}" Answer="${ans}"</p>`;
+        } else {
+          output.innerHTML = '<p>Invalid format. Use: #savedb math=<math> ans=<answer></p>';
+        }
+      } else if (command === '#maths') {
+        if (mathDB.length === 0) {
+          output.innerHTML = '<p>No math records found.</p>';
+        } else {
+          output.innerHTML = '<p>Saved Math Records:</p>';
+          mathDB.forEach((item, index) => {
+            output.innerHTML += `<p>${index + 1}. ${item.math} = ${item.ans}</p>`;
+          });
+        }
+      } else {
+        output.innerHTML = '<p>Unknown command. Try "#mathdb connect", "#savedb", or "#maths".</p>';
+      }
+
+      // Clear input
+      commandInput.value = '';
+    }
+  </script>
+</body>
+    </html>
