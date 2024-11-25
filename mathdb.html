@@ -114,13 +114,27 @@
             output.innerHTML += `<p>${index + 1}. ${item.math} = ${item.ans}</p>`;
           });
         }
+      } else if (command === '#downloaddb #maths') {
+        downloadMathDB();
+        output.innerHTML = '<p>MathDB has been downloaded as a JSON file.</p>';
       } else {
-        output.innerHTML = '<p>Unknown command. Try "#mathdb connect", "#savedb", or "#maths".</p>';
+        output.innerHTML = '<p>Unknown command. Try "#mathdb connect", "#savedb", "#maths", or "#downloaddb #maths".</p>';
       }
 
       // Clear input
       commandInput.value = '';
     }
+
+    function downloadMathDB() {
+      const dataStr = JSON.stringify(mathDB, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mathDB.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
   </script>
 </body>
-    </html>
+</html>
